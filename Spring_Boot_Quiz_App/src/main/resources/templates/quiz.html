@@ -19,9 +19,13 @@
 	<div class="container py-5 px-4">
 		<h1 class="bg-danger text-light">Only Select The Correct Answer</h1>
 
-		<form action="submit" method="POST">
-			<div class="ques-box bg-dark text-light">
+		<form action="submit" method="POST" th:object="${questionForm}">
+			<div class="ques-box bg-dark text-light" th:form="question, i: ${questionForm.questions}">
+				<p class="title" th:text="${question.title}"></p>
+				<div class="option">
+					<input type="radio" th:name="">
 
+				</div>
 			</div>
 		</form>
 	</div>

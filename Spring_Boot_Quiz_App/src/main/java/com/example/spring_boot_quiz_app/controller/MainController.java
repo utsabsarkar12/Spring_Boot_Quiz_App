@@ -1,6 +1,8 @@
 package com.example.spring_boot_quiz_app.controller;
 
+import com.example.spring_boot_quiz_app.model.QuestionForm;
 import com.example.spring_boot_quiz_app.model.Result;
+import com.example.spring_boot_quiz_app.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ public class MainController {
 
     @Autowired
     Result result;
+    @Autowired
+    QuizService quizService;
     Boolean submitted = false;
 
     @ModelAttribute("result")
@@ -34,6 +38,10 @@ public class MainController {
         }
         submitted = false;
         result.setUsername(username);
+
+        QuestionForm questionForm = quizService.getQuestionForm();
+        m.addAttribute("questionForm", questionForm);
+
         return "quiz.html";
     }
 }
