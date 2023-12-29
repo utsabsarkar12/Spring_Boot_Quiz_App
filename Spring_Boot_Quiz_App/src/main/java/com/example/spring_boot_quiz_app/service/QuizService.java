@@ -6,6 +6,7 @@ import com.example.spring_boot_quiz_app.model.Result;
 import com.example.spring_boot_quiz_app.repository.QuestionRepository;
 import com.example.spring_boot_quiz_app.repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,5 +42,26 @@ public class QuizService {
         return questionForm;
 
     }
+
+    public int getResult(QuestionForm questionForm){
+        int correct = 0;
+
+        for (Question q : questionForm.getQuestions()){
+            if (q.getAns() == q.getChose())
+                correct++;
+        }
+        return correct;
+    }
+
+    public void saveScore(Result result){
+        Result saveResult = new Result();
+        saveResult.setUsername(result.getUsername());
+        saveResult.setTotalCorrect(result.getTotalCorrect());
+        resultRepository.save(saveResult);
+    }
+     public List<Result> getTopScore(){
+        List<Result> scoreList = resultRepository.findAll(Sort.by(Sort.Direction.DESC, "totalCorrect"));
+        return scoreList;
+     }
 
 }
