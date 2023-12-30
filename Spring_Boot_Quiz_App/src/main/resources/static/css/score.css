@@ -9,6 +9,19 @@ body {
 	overflow-x: hidden;
 }
 
+.main-container{
+	min-height: calc(100vh - 136px);
+	text-align: center;
+}
+
+tr {
+	border: 1px solid white;
+}
+
+th, td {
+	padding: 10px;
+}
+
 footer{
 	height: 80px;
 	text-align: center;
